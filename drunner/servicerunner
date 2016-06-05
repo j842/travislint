@@ -6,7 +6,7 @@ MYDIR=$( dirname "$(readlink -f "$0")" )
 # defines functions die and isHook, amongst others.
 source "$MYDIR/utils.sh"
 
-TRAVISDIR="${PWD}"
+export TRAVISDIR="${PWD}"
 cd "$MYDIR"
 
 #------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ NAME
    ${SERVICENAME} - checks .travis.yml files.
 
 SYNOPSIS
-   ${SERVICENAME} check - check the .travis.yml file in current dir 
+   ${SERVICENAME} check - check the .travis.yml file in current dir
    ${SERVICENAME} help  - This help
 
 EOF
@@ -40,17 +40,17 @@ function main {
 
          enter)
             echo "${TRAVISDIR} mapped to /pwd"
-            TRAVISDIR="${TRAVISDIR}" docker-compose -p "${SERVICENAME}" run --rm travislint /bin/bash "$@"
+            docker-compose -p "${SERVICENAME}" run --rm travislint /bin/bash "$@"
             ;;
 
          selftest)
             ;;
-            
+
          check)
             echo "Checking .travis.yml in ${TRAVISDIR}"
-            TRAVISDIR="${TRAVISDIR}" docker-compose -p "${SERVICENAME}" run --rm travislint
+            docker-compose -p "${SERVICENAME}" run --rm travislint
             ;;
-            
+
          *)
             # For the standard hooks we don't implement we're required to produce
             # no output and set exit code 127 (E_NOTIMPL).
