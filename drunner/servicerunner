@@ -6,7 +6,7 @@ MYDIR=$( dirname "$(readlink -f "$0")" )
 # defines functions die and isHook, amongst others.
 source "$MYDIR/utils.sh"
 
-TRAVISDIR="${PWD}"
+export TRAVISDIR="${PWD}"
 cd "$MYDIR"
 
 #------------------------------------------------------------------------------------
