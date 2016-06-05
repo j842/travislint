@@ -7,5 +7,5 @@ before_install:
 
 script:
    - ddev build
-   - dtest test drunner/travislint
+   - dtest test -d drunner/travislint
    - travislint check
