@@ -4,6 +4,6 @@ services:
    travislint:
       image: drunner/travislint
       volumes:
-         - "./:/pwd"
-      command: travis lint /pwd
+         - "${TRAVISDIR}:/pwd"
+      command: travis lint --skip-completion-check /pwd/.travis.yml
       network_mode: "bridge"

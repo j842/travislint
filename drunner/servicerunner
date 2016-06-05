@@ -6,6 +6,9 @@ MYDIR=$( dirname "$(readlink -f "$0")" )
 # defines functions die and isHook, amongst others.
 source "$MYDIR/utils.sh"
 
+TRAVISDIR="${PWD}"
+cd "$MYDIR"
+
 #------------------------------------------------------------------------------------
 # showhelp - give some info about the service. SERVICENAME and IMAGENAME are provided by variables.sh.
 
@@ -36,14 +39,16 @@ function main {
             ;;
 
          enter)
-            docker-compose -p "${SERVICENAME}" run --rm travislint /bin/bash "$@"
+            echo "${TRAVISDIR} mapped to /pwd"
+            TRAVISDIR="${TRAVISDIR}" docker-compose -p "${SERVICENAME}" run --rm travislint /bin/bash "$@"
             ;;
 
          selftest)
             ;;
             
          check)
-            docker-compose -p "${SERVICENAME}" run --rm travislint
+            echo "Checking .travis.yml in ${TRAVISDIR}"
+            TRAVISDIR="${TRAVISDIR}" docker-compose -p "${SERVICENAME}" run --rm travislint
             ;;
             
          *)
