@@ -7,3 +7,5 @@ Simple dService to check travis yml files.
 drunner install drunner/travislint
 travislint check
 ```
+
+This will check the .travis.yml file in the current directory.
