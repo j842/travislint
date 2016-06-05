@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+   travislint:
+      image: drunner/travislint
+      volumes:
+         - "./:/pwd"
+      command: travis lint /pwd
+      network_mode: "bridge"

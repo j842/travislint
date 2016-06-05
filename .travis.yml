@@ -1,0 +1,11 @@
+language: cpp
+sudo: required
+dist: trusty
+before_install:
+   - wget -nv https://drunner.s3.amazonaws.com/install_drunner_travis.sh
+   - /bin/bash install_drunner_travis.sh
+
+script:
+   - ddev build
+   - dtest test drunner/travislint
+   - travislint check
