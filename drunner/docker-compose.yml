@@ -7,3 +7,5 @@ services:
          - "${TRAVISDIR}:/pwd"
       command: travis lint --skip-completion-check /pwd/.travis.yml
       network_mode: "bridge"
+      environment:
+         - TRAVISDIR
